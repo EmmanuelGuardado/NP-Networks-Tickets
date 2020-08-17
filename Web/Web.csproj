@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="bootstrap" Version="4.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.6" />
@@ -24,10 +25,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\imagenes\logo-np2.jpg" />
   </ItemGroup>
 
 </Project>
