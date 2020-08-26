@@ -28,4 +28,8 @@
     <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\ViewsModels\" />
+  </ItemGroup>
+
 </Project>

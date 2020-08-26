@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entidades.Modelos
 {
@@ -12,7 +13,9 @@ namespace Entidades.Modelos
         }
 
         public int TicketId { get; set; }
+        [Required]
         public string DescripcionProblema { get; set; }
+        [Required]
         public int EmpresaId { get; set; }
 
         public virtual Empresas Empresa { get; set; }

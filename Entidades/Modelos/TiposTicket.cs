@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entidades.Modelos
 {
@@ -11,7 +12,9 @@ namespace Entidades.Modelos
         }
 
         public byte TipoTicketId { get; set; }
+        [Required]
         public string TipoTicket { get; set; }
+        [Required]
         public int TicketId { get; set; }
 
         public virtual Tickets Ticket { get; set; }

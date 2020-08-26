@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entidades.Modelos
 {
@@ -10,7 +11,8 @@ namespace Entidades.Modelos
             DetallesServicio = new HashSet<DetallesServicio>();
         }
 
-        public int TecnicoId { get; set; }
+        public int TecnicoId { get; set; } 
+        [Required]
         public string Nombre { get; set; }
         public bool? Activo { get; set; }
         public string Longitud { get; set; }
