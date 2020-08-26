@@ -6,6 +6,7 @@ namespace Entidades.Modelos
 {
     public partial class EstadoTicket
     {
+        [Key]
         public int EstadoTicketId { get; set; }
         public string Estado { get; set; }
         [Required]

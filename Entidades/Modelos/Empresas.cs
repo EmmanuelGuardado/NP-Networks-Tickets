@@ -11,7 +11,7 @@ namespace Entidades.Modelos
             Contratos = new HashSet<Contratos>();
             Tickets = new HashSet<Tickets>();
         }
-
+        [Key]
         public int EmpresaId { get; set; }
         [Required]
         [MaxLength(35,ErrorMessage ="El nombre no puede ser mayor a 35 carácteres")]

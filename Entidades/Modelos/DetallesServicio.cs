@@ -10,7 +10,7 @@ namespace Entidades.Modelos
         {
             DetallesProductos = new HashSet<DetallesProductos>();
         }
-
+        [Key]
         public int DetalleServicioId { get; set; }
         [Required]
         public TimeSpan HoraInicio { get; set; }

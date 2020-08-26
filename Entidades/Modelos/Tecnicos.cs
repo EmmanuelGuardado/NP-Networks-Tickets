@@ -10,7 +10,7 @@ namespace Entidades.Modelos
         {
             DetallesServicio = new HashSet<DetallesServicio>();
         }
-
+        [Key]
         public int TecnicoId { get; set; } 
         [Required]
         public string Nombre { get; set; }

@@ -10,7 +10,7 @@ namespace Entidades.Modelos
         {
             DetallesProductos = new HashSet<DetallesProductos>();
         }
-
+        [Key]
         public byte ProductoId { get; set; }
         [Required]
         [MaxLength(35)]

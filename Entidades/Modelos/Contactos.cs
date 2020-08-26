@@ -6,6 +6,7 @@ namespace Entidades.Modelos
 {
     public partial class Contactos
     {
+        [Key]
         public int ContactoId { get; set; }
         [Required]
         [MaxLength(30, ErrorMessage = "El nombre no puede ser mayor a 30 carácteres")]

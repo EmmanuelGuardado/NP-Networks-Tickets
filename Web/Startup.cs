@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Web.AccesoDatos.Data;
+using Entidades.Modelos;
 
 namespace Web
 {
@@ -30,10 +31,16 @@ namespace Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddErrorDescriber<ErroresEspanol>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddIdentity<IdentityUser, IdentityRole>().AddErrorDescriber<ErroresEspanol>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
+            services.Configure<IdentityOptions>(o =>
+            {
+                o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequireUppercase = false;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

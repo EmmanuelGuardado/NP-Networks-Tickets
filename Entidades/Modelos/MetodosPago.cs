@@ -6,6 +6,7 @@ namespace Entidades.Modelos
 {
     public partial class MetodosPago
     {
+        [Key]
         public byte MetodosPagoId { get; set; }
         [Required]
         public string Nombre { get; set; }

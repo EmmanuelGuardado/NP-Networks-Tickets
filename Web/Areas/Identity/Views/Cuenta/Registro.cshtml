@@ -1,4 +1,4 @@
-﻿
+﻿@model Web.Areas.Identity.ViewsModels.UsuarioViewModel
 @{
     ViewData["Title"] = "Registro";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,15 +11,16 @@
                 <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
             </svg>
         </div>
-        <form>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <form method="post">
             <div class="form-group">
-                <input type="email" class="form-control" placeholder="Usuario" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="email" class="form-control" placeholder="Usuario" asp-for="Usuario">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="Contraseña" id="exampleInputPassword1">
+                <input type="password" class="form-control" placeholder="Contraseña" asp-for="Contrasena">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="Confirmar Contraseña" id="exampleInputPassword1">
+                <input type="password" class="form-control" placeholder="Confirmar Contraseña" asp-for="ValidarContrasena">
             </div>
             <button type="submit" class="btn btn-primary btn-block">Registrar</button>
         </form>

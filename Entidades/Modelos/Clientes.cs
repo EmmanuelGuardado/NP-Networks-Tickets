@@ -11,7 +11,7 @@ namespace Entidades.Modelos
             Contactos = new HashSet<Contactos>();
             Contratos = new HashSet<Contratos>();
         }
-
+        [Key]
         public int ClienteId { get; set; }
         [Required]
         [MaxLength(35,ErrorMessage ="El nombre no puede ser mayor a 35 carácteres")]

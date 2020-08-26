@@ -6,6 +6,7 @@ namespace Entidades.Modelos
 {
     public partial class DetallesProductos
     {
+        [Key]
         public int DetalleProductoId { get; set; }
         [Required]
         public byte Cantidad { get; set; }

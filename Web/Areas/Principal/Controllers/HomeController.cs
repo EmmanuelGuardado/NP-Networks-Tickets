@@ -9,6 +9,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
+    [Area("Principal")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

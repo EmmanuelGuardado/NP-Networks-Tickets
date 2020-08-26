@@ -11,7 +11,7 @@ namespace Entidades.Modelos
             OrdenesServicio = new HashSet<OrdenesServicio>();
             TiposTicket = new HashSet<TiposTicket>();
         }
-
+        [Key]
         public int TicketId { get; set; }
         [Required]
         public string DescripcionProblema { get; set; }

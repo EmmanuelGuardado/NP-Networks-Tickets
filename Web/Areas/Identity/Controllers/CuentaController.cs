@@ -43,7 +43,7 @@ namespace Web.Areas.Identity
                 if (resultado.Succeeded)
                 {
                     await _gestionLogin.SignInAsync(usuario, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home", new { area = "Principal" });
                 }
 
                 foreach (var error in resultado.Errors)

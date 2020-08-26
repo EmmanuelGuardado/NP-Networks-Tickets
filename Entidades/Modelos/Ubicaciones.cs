@@ -10,7 +10,7 @@ namespace Entidades.Modelos
         {
             Clientes = new HashSet<Clientes>();
         }
-
+        [Key]
         public int UbicacionId { get; set; }
         [Required]
         [MaxLength(30)]

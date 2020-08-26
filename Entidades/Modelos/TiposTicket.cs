@@ -10,7 +10,7 @@ namespace Entidades.Modelos
         {
             EstadoTicket = new HashSet<EstadoTicket>();
         }
-
+        [Key]
         public byte TipoTicketId { get; set; }
         [Required]
         public string TipoTicket { get; set; }
