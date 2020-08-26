@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     ViewBag.Title = "Login";
 }
 
@@ -9,37 +9,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@ViewBag.Title</title>
-    <style>
-        .minh-100 {
-            height: 100vh;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-4">
-                <img src="~/images/logo-np2.jpg" alt="logo" class="img-fluid"/>
-                <form action="">
-                    <div class="form-group">
-                        <label for="txtUsuario">Usuario</label>
-                        <input type="email" class="form-control" id="txtUsuario">
-                    </div>
-                    <div class="form-group">
-                        <label for="txtContrasena">Contraseña</label>
-                        <input type="password" class="form-control" id="txtContrasena">
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="chkRecordarme">
-                        <label class="form-check-label" for="chkRecordarme">
-                            Recordarme
-                        </label>
-                    </div>
-                    <div class="col text-center mt-3">
-                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                    </div>
-                </form>
-            </div>
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <img src="~/images/logo-np2.jpg" alt="logo" class="img-fluid" />
+            <form action="">
+                <div class="form-group">
+                    <label for="txtUsuario">Usuario</label>
+                    <input type="email" class="form-control" id="txtUsuario">
+                </div>
+                <div class="form-group">
+                    <label for="txtContrasena">Contraseña</label>
+                    <input type="password" class="form-control" id="txtContrasena">
+                </div>
+                <div class="col text-center mt-3">
+                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>
