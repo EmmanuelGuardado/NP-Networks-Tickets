@@ -62,7 +62,7 @@ namespace Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{area=Identity}/{controller=Cuenta}/{action=Registro}");
                 endpoints.MapRazorPages();
             });
         }
