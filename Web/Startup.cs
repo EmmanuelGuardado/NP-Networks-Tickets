@@ -31,7 +31,7 @@ namespace Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddErrorDescriber<ErroresEspanol>()
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddErrorDescriber<ErroresEspanol>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             //services.AddIdentity<IdentityUser, IdentityRole>().AddErrorDescriber<ErroresEspanol>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -69,7 +69,7 @@ namespace Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{area=Identity}/{controller=Cuenta}/{action=Registro}");
+                    pattern: "{area=Identity}/{controller=Cuenta}/{action=Login}");
                 endpoints.MapRazorPages();
             });
         }

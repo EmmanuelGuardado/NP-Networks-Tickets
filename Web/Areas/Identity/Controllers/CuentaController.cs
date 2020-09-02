@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Web.Areas.Identity.ViewsModels;
@@ -18,27 +15,24 @@ namespace Web.Areas.Identity
         {
             this._gestionUsuarios = gestionUsuarios;
             this._gestionLogin = gestionLogin;
-        }
-        public IActionResult Login()
-        {
-            return View();
-        }
+        }        
         public IActionResult Registro()
         {
             return View();
         }
+        
         [HttpPost]
-        public async Task<IActionResult> Registro(UsuarioViewModel u)
+        public async Task<IActionResult> Registro(UsuarioViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var usuario = new IdentityUser
                 {
-                    UserName = u.Usuario,
-                    Email = u.Usuario
+                    UserName = model.Usuario,
+                    Email = model.Usuario
                 };
 
-                var resultado = await _gestionUsuarios.CreateAsync(usuario, u.Contrasena);
+                var resultado = await _gestionUsuarios.CreateAsync(usuario, model.Contrasena);
 
                 if (resultado.Succeeded)
                 {
@@ -51,7 +45,33 @@ namespace Web.Areas.Identity
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            return View(u);
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                //var user = await _gestionUsuarios.FindByEmailAsync(model.Usuario);
+                var result = await _gestionLogin.PasswordSignInAsync(model.Usuario, model.Contrasena, model.Recordarme, lockoutOnFailure: false);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Principal" });
+                }
+                ModelState.AddModelError(string.Empty, "Inicio de sesión no valido");
+            }
+            return View(model);
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CerrarSesion()
+        {
+            await _gestionLogin.SignOutAsync();
+            return RedirectToAction("Login", "Cuenta");
         }
     }
 }
