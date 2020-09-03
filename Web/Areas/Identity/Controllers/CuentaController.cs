@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Web.Areas.Identity.ViewsModels;
 
 namespace Web.Areas.Identity
@@ -22,7 +23,7 @@ namespace Web.Areas.Identity
         }
         
         [HttpPost]
-        public async Task<IActionResult> Registro(UsuarioViewModel model)
+        public async Task<IActionResult> Registro(UsuarioViewModel model, string email)
         {
             if (ModelState.IsValid)
             {
@@ -32,15 +33,15 @@ namespace Web.Areas.Identity
                     Email = model.Usuario
                 };
 
-                var resultado = await _gestionUsuarios.CreateAsync(usuario, model.Contrasena);
+                IdentityResult result = await _gestionUsuarios.CreateAsync(usuario, model.Contrasena);
 
-                if (resultado.Succeeded)
+                if (result.Succeeded)
                 {
                     await _gestionLogin.SignInAsync(usuario, isPersistent: false);
                     return RedirectToAction("Index", "Home", new { area = "Principal" });
                 }
 
-                foreach (var error in resultado.Errors)
+                foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
@@ -52,7 +53,6 @@ namespace Web.Areas.Identity
         {
             if (ModelState.IsValid)
             {
-                //var user = await _gestionUsuarios.FindByEmailAsync(model.Usuario);
                 var result = await _gestionLogin.PasswordSignInAsync(model.Usuario, model.Contrasena, model.Recordarme, lockoutOnFailure: false);
 
                 if (result.Succeeded)
@@ -72,6 +72,20 @@ namespace Web.Areas.Identity
         {
             await _gestionLogin.SignOutAsync();
             return RedirectToAction("Login", "Cuenta");
+        }
+        //[AcceptVerbs("Get","Post")]
+        public async Task<IActionResult> ComprobarEmail(string email)
+        {
+            var usuario = await _gestionUsuarios.FindByEmailAsync(email);
+
+            if (usuario == null)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json(false);
+            }
         }
     }
 }
