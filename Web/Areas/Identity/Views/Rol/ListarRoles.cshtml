@@ -1,0 +1,36 @@
+﻿@model IEnumerable<IdentityRole>
+@{
+    ViewData["Title"] = "ListarRoles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Any())
+{
+    <a class="btn btn-primary" asp-action="CrearRol" asp-controller="Rol">Crear nuevo rol</a>
+    foreach (var rol in Model)
+    {
+        <div class="card-header">
+            Rol ID: @rol.Id
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@rol.Name</h5>
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-primary">Editar</a>
+            <a class="btn btn-danger">Emilinar</a>
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            Todavia no hay roles creados...
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Use este boton para crear un rol</h5>
+            <a class="btn btn-primary" asp-action="CrearRol" asp-controller="Rol">Crear rol</a>
+        </div>
+    </div>
+}
+
