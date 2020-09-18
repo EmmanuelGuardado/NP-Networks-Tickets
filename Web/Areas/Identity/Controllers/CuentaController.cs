@@ -73,7 +73,7 @@ namespace Web.Areas.Identity
             await _gestionLogin.SignOutAsync();
             return RedirectToAction("Login", "Cuenta");
         }
-        //[AcceptVerbs("Get","Post")]
+
         public async Task<IActionResult> ComprobarEmail(string email)
         {
             var usuario = await _gestionUsuarios.FindByEmailAsync(email);

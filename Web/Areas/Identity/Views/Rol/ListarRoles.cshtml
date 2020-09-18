@@ -3,21 +3,28 @@
     ViewData["Title"] = "ListarRoles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<div class="row justify-content-center">
+    <h2 class="text-black-50">Lista de roles</h2>
+</div>
 @if (Model.Any())
 {
-    <a class="btn btn-primary" asp-action="CrearRol" asp-controller="Rol">Crear nuevo rol</a>
+    <a class="btn btn-primary mb-3" asp-action="CrearRol" asp-controller="Rol" style="width:auto">Crear nuevo rol</a>
     foreach (var rol in Model)
     {
-        <div class="card-header">
-            Rol ID: @rol.Id
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">@rol.Name</h5>
-        </div>
-        <div class="card-footer">
-            <a class="btn btn-primary">Editar</a>
-            <a class="btn btn-danger">Emilinar</a>
+        <div class="card mb-3">
+            <div class="card-header">
+                Rol ID: @rol.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@rol.Name</h5>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Rol" asp-action="EditarRol" 
+                   asp-route-id="@rol.Id" class="btn btn-primary">
+                    Editar                
+                </a>
+                <a href="#" class="btn btn-danger">Emilinar</a>
+            </div>
         </div>
     }
 }
