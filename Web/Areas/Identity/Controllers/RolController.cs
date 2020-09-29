@@ -105,5 +105,83 @@ namespace Web.Areas.Identity.Controllers
                 return View(model);
             }
         }
+        public async Task<IActionResult> EditarUsuarioRol(string rolId)
+        {
+            ViewBag.roleId = rolId;
+
+            var role = await _gestionRoles.FindByIdAsync(rolId);
+
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Rol con el ID = {rolId} no encontrado";
+                return View("Error");
+            }
+
+            var model = new List<UsuarioRolViewModel>();
+
+            foreach (var user in _gestionUsuarios.Users)
+            {
+                var usuarioRol = new UsuarioRolViewModel
+                {
+                    UsuarioId = user.Id,
+                    UsuarioNombre = user.UserName
+                };
+
+                if (await _gestionUsuarios.IsInRoleAsync(user, role.Name))
+                {
+                    usuarioRol.EstaSeleccionado = true;
+                }
+                else
+                {
+                    usuarioRol.EstaSeleccionado = false;
+                }
+                model.Add(usuarioRol);
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditarUsuarioRol(List<UsuarioRolViewModel> model, string rolId)
+        {
+            var rol = await _gestionRoles.FindByIdAsync(rolId);
+
+            if (rol == null)
+            {
+                ViewBag.ErrorMessage = $"Rol con el ID = {rolId} no encontrado";
+                return View("Error");
+            }
+
+            for (int i = 0; i < model.Count; i++)
+            {
+                var user = await _gestionUsuarios.FindByIdAsync(model[i].UsuarioId);
+
+                IdentityResult result = null;
+
+                if (model[i].EstaSeleccionado && !(await _gestionUsuarios.IsInRoleAsync(user,rol.Name)))
+                {
+                    result = await _gestionUsuarios.AddToRoleAsync(user, rol.Name);
+                }
+                else if (!model[i].EstaSeleccionado && await _gestionUsuarios.IsInRoleAsync(user,rol.Name))
+                {
+                    result = await _gestionUsuarios.RemoveFromRoleAsync(user, rol.Name);
+                }
+                else
+                {
+                    continue;
+                }
+
+                if (result.Succeeded)
+                {
+                    if (i < (model.Count - 1))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        return RedirectToAction("EditarRol", new { Id = rolId });
+                    }
+                }
+            }
+            return RedirectToAction("EditarRol", new { Id = rolId });
+        }
     }
 }
