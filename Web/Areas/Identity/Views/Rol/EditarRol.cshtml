@@ -47,8 +47,9 @@
         <div class="card-footer">
             <a asp-controller="Rol" asp-action="EditarUsuarioRol"
                asp-route-rolId="@Model.Id" class="btn btn-primary" style="width:auto">
-                Crear o eliminar usuario
+                Agregar o eliminar usuario
             </a>
+            <a asp-controller="Rol" asp-action="ListarRoles" class="btn btn-primary" style="width:auto">Cancelar</a>
         </div>
     </div>
 </form>
