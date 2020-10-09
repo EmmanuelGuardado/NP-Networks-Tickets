@@ -23,7 +23,7 @@ namespace Web.Areas.Identity
         }
         
         [HttpPost]
-        public async Task<IActionResult> Registro(UsuarioViewModel model, string email)
+        public async Task<IActionResult> Registro(UsuarioViewModel model)
         {
             if (ModelState.IsValid)
             {

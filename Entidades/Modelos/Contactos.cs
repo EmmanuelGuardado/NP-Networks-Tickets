@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entidades.Modelos
 {
@@ -17,8 +18,9 @@ namespace Entidades.Modelos
         [Phone]
         public string Telefono { get; set; }
         [Required]
-        public int ClienteId { get; set; }
+        public int Cliente_id { get; set; }
 
+        [ForeignKey("Cliente_id")]
         public virtual Clientes Cliente { get; set; }
     }
 }

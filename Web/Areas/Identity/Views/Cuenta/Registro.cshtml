@@ -12,21 +12,22 @@
             </svg>
         </div>
         <form method="post">
-            <div asp-validation-summary="All" class="text-danger">
-            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <input type="email" class="form-control" placeholder="Usuario" asp-for="Usuario">
-                <span asp-validation-for="Usuario" class="text-danger"></span>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Usuario" asp-for="Usuario">
+                    <span asp-validation-for="Usuario" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Contraseña" asp-for="Contrasena">
+                    <span asp-validation-for="Contrasena" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Confirmar Contraseña" asp-for="ValidarContrasena">
+                    <span asp-validation-for="ValidarContrasena" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Registrar</button>
             </div>
-            <div class="form-group">
-                <input type="password" class="form-control" placeholder="Contraseña" asp-for="Contrasena">
-                <span asp-validation-for="Contrasena" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" placeholder="Confirmar Contraseña" asp-for="ValidarContrasena">
-                <span asp-validation-for="ValidarContrasena" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
         </form>
     </div>
 </div>

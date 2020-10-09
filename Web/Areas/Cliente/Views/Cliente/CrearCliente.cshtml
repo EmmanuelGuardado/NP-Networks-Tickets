@@ -1,0 +1,88 @@
+﻿@model Web.Areas.Cliente.ViewModels.UbicacionClienteContactoViewModel
+@{
+    ViewData["Title"] = "CrearUsuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form method="post" asp-action="CrearCliente">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <div class="row justify-content-center text-center pt-5">
+            <div class="col-10">
+                <div class="p-2 mb-2 bg-danger text-white rounded-left rounded-right">
+                    <strong>CLIENTE</strong>
+                </div>
+            </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Nombre" asp-for="Clientes.Nombre" />
+                <span asp-validation-for="Clientes.Nombre"></span>
+            </div>
+            <div class="col">
+                <input type="email" class="form-control" placeholder="Email" asp-for="Clientes.Email" />
+                <span asp-validation-for="Clientes.Email"></span>
+            </div>
+            <div class="col">
+                <input type="date" class="form-control" placeholder="Fecha de creación" value="" asp-for="Clientes.FechaCreacion" />
+                <span asp-validation-for="Clientes.FechaCreacion"></span>
+            </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col-6">
+                <div class="row justify-content-center text-center">
+                    <div class="col-8">
+                        <div class="p-2 mb-2 bg-danger text-white rounded-left rounded-right">
+                            <strong>Ubicación</strong>
+                        </div>
+                    </div>
+                    <div class="form-group pr-2">
+                        <input type="text" class="form-control" placeholder="Nombre" asp-for="Ubicaciones.Nombre" />
+                        <span asp-validation-for="Ubicaciones.Nombre"></span>
+                    </div>
+                    <div class="form-group pr-2">
+                        <input type="text" class="form-control" placeholder="Dirección 1" asp-for="Ubicaciones.Direccion1" />
+                        <span asp-validation-for="Ubicaciones.Direccion1"></span>
+                    </div>
+                    <div class="form-group pr-2">
+                        <input type="text" class="form-control" placeholder="Dirección 2" asp-for="Ubicaciones.Direccion2" />
+                        <span asp-validation-for="Ubicaciones.Direccion2"></span>
+                    </div>
+                    <div class="form-group pr-2">
+                        <input type="text" class="form-control" placeholder="Ciudad" asp-for="Ubicaciones.Ciudad" />
+                        <span asp-validation-for="Ubicaciones.Ciudad"></span>
+                    </div>
+                    <div class="form-group pr-2">
+                        <input type="text" class="form-control" placeholder="Código Postal" asp-for="Ubicaciones.CodigoPostal" />
+                        <span asp-validation-for="Ubicaciones.CodigoPostal"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row justify-content-center text-center">
+                    <div class="col-8">
+                        <div class="p-2 mb-2 bg-danger text-white rounded-left rounded-right">
+                            <strong>Contácto</strong>
+                        </div>
+                    </div>
+                    <div class="form-group pr-2">
+                        <input type="text" class="form-control" placeholder="Contacto" asp-for="Contactos.Nombre" />
+                        <span asp-validation-for="Contactos.Nombre"></span>
+                    </div>
+                    <div class="form-group pr-2">
+                        <input type="email" class="form-control" placeholder="Email" asp-for="Contactos.Email" />
+                        <span asp-validation-for="Contactos.Email"></span>
+                    </div>
+                    <div class="form-group pr-2">
+                        <input type="text" class="form-control" placeholder="Teléfono" asp-for="Contactos.Telefono" />
+                        <span asp-validation-for="Contactos.Telefono"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <button type="submit" class="btn btn-dark btn-block">Guardar</button>
+            </div>
+        </div>
+    </div>
+</form>

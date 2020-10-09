@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entidades.Modelos
 {
@@ -22,8 +23,9 @@ namespace Entidades.Modelos
         public DateTime? FechaCreacion { get; set; }
         public bool? Activo { get; set; }
         [Required]
-        public int UbicacionId { get; set; }
+        public int Ubicacion_id { get; set; }
 
+        [ForeignKey("Ubicacion_id")]
         public virtual Ubicaciones Ubicacion { get; set; }
         public virtual ICollection<Contactos> Contactos { get; set; }
         public virtual ICollection<Contratos> Contratos { get; set; }
