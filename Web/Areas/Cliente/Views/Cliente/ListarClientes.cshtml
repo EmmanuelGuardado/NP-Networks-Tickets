@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Web.Areas.Cliente.ViewModels.ListaViewModel>
+@{
+    ViewData["Title"] = "Listar Clientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table text-danger">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Email</th>
+            <th>Contacto</th>
+            <th>Teléfeno</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.NombreCliente
+                </td>
+                <td>
+                    @item.EmailCliente
+                </td>
+                <td>
+                    @item.NombreContacto
+                </td>
+                <td>
+                    @item.TelefonoContacto
+                </td>
+                <td>
+                    @item.EmailContacto
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
