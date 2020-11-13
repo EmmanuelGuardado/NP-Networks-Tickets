@@ -96,5 +96,34 @@ namespace Web.Areas.Identity
         {
             return View();
         }
+        public IActionResult CambiarContrasena()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CambiarContrasena(CambioContrasenaViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _gestionUsuarios.GetUserAsync(User);
+                if (user == null)
+                {
+                    return RedirectToAction("Login");
+                }
+
+                var result = await _gestionUsuarios.ChangePasswordAsync(user, model.ContrasenaActual, model.NuevaContrasena);
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View();
+                }
+                await _gestionLogin.RefreshSignInAsync(user);
+                return View("CambiarContrasenaConfirmacion");
+            }
+            return View(model);
+        }
     }
 }
