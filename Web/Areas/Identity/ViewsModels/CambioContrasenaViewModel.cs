@@ -18,7 +18,7 @@ namespace Web.Areas.Identity.ViewsModels
         public string NuevaContrasena { get; set; }
         [DataType(DataType.Password)]
         [Display(Name = "Confirmar nueva contraseña")]
-        [Compare("Nueva Contraseña",ErrorMessage ="La contraseña no coincide")]
+        [Compare("NuevaContrasena",ErrorMessage ="La contraseña no coincide")]
         public string ConfirmarContrasena { get; set; }
     }
 }
