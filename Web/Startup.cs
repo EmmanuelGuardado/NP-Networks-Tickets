@@ -39,6 +39,11 @@ namespace Web
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequireUppercase = false;
             });
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Cuenta/Login";
+                options.AccessDeniedPath = "/Cuenta/AcccesoDenegado";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

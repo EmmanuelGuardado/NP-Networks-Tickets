@@ -8,13 +8,10 @@ namespace Entidades.Modelos
     {
         [Key]
         public int DetalleProductoId { get; set; }
-        [Required]
         public byte Cantidad { get; set; }
-        [Required]
         public double Precio { get; set; }
         public string FirmaCliente { get; set; }
         public int DetalleServicioId { get; set; }
-        [Required]
         public byte ProductoId { get; set; }
 
         public virtual DetallesServicio DetalleServicio { get; set; }

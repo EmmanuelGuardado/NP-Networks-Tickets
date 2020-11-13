@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
+    <Compile Remove="Migrations\20201024231830_Normalizacion-metodoPagoYtipoTicket-tablas.cs" />
+    <Compile Remove="Migrations\20201024231830_Normalizacion-metodoPagoYtipoTicket-tablas.Designer.cs" />
+    <Compile Remove="Migrations\20201024233002_normalizando-tablas.cs" />
+    <Compile Remove="Migrations\20201024233002_normalizando-tablas.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

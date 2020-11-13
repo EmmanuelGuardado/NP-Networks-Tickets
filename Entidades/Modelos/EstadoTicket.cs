@@ -9,7 +9,6 @@ namespace Entidades.Modelos
         [Key]
         public int EstadoTicketId { get; set; }
         public string Estado { get; set; }
-        [Required]
         public byte TipoTicketId { get; set; }
 
         public virtual TiposTicket TipoTicket { get; set; }

@@ -12,10 +12,7 @@ namespace Entidades.Modelos
         }
         [Key]
         public byte ProductoId { get; set; }
-        [Required]
-        [MaxLength(35)]
         public string Nombre { get; set; }
-        [MaxLength(50)]
         public string Descripcion { get; set; }
 
         public virtual ICollection<DetallesProductos> DetallesProductos { get; set; }

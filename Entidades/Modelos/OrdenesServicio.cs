@@ -12,11 +12,8 @@ namespace Entidades.Modelos
         }
         [Key]
         public int OrdenServicioId { get; set; }
-        [Required]
         public string Empresa { get; set; }
-        [Required]
         public string Cliente { get; set; }
-        [Required]
         public int TicketId { get; set; }
         public string TipoServicio { get; set; }
 

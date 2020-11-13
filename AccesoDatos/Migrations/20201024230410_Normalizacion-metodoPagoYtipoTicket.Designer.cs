@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web.AccesoDatos.Data;
 
 namespace AccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201024230410_Normalizacion-metodoPagoYtipoTicket")]
+    partial class NormalizacionmetodoPagoYtipoTicket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,20 +32,24 @@ namespace AccesoDatos.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<DateTime?>("FechaCreacion")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(35)")
+                        .HasMaxLength(35);
 
-                    b.Property<int>("UbicacionId")
+                    b.Property<int>("Ubicacion_id")
                         .HasColumnType("int");
 
                     b.HasKey("ClienteId");
 
-                    b.HasIndex("UbicacionId");
+                    b.HasIndex("Ubicacion_id");
 
                     b.ToTable("Clientes");
                 });
@@ -55,21 +61,25 @@ namespace AccesoDatos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClienteId")
+                    b.Property<int>("Cliente_id")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ContactoId");
 
-                    b.HasIndex("ClienteId");
+                    b.HasIndex("Cliente_id");
 
                     b.ToTable("Contactos");
                 });
@@ -93,16 +103,11 @@ namespace AccesoDatos.Migrations
                     b.Property<DateTime>("FechaInicio")
                         .HasColumnType("datetime2");
 
-                    b.Property<byte>("MetodoPagoId")
-                        .HasColumnType("tinyint");
-
                     b.HasKey("ContratoId");
 
                     b.HasIndex("ClienteId");
 
                     b.HasIndex("EmpresaId");
-
-                    b.HasIndex("MetodoPagoId");
 
                     b.ToTable("Contratos");
                 });
@@ -146,7 +151,9 @@ namespace AccesoDatos.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DetalleServicio")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<TimeSpan>("HoraFinal")
                         .HasColumnType("time");
@@ -155,7 +162,8 @@ namespace AccesoDatos.Migrations
                         .HasColumnType("time");
 
                     b.Property<string>("Notas")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<int>("OrdenServicioId")
                         .HasColumnType("int");
@@ -186,13 +194,17 @@ namespace AccesoDatos.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion1")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Direccion2")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(35)")
+                        .HasMaxLength(35);
 
                     b.HasKey("EmpresaId");
 
@@ -224,10 +236,16 @@ namespace AccesoDatos.Migrations
                     b.Property<byte>("MetodosPagoId")
                         .HasColumnType("tinyint");
 
+                    b.Property<int>("ContratoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MetodosPagoId");
+
+                    b.HasIndex("ContratoId");
 
                     b.ToTable("MetodosPago");
                 });
@@ -240,9 +258,11 @@ namespace AccesoDatos.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Cliente")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Empresa")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TicketId")
@@ -264,10 +284,13 @@ namespace AccesoDatos.Migrations
                         .HasColumnType("tinyint");
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(35)")
+                        .HasMaxLength(35);
 
                     b.HasKey("ProductoId");
 
@@ -291,6 +314,7 @@ namespace AccesoDatos.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TecnicoId");
@@ -306,19 +330,15 @@ namespace AccesoDatos.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DescripcionProblema")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EmpresaId")
                         .HasColumnType("int");
 
-                    b.Property<byte>("TipoTicketId")
-                        .HasColumnType("tinyint");
-
                     b.HasKey("TicketId");
 
                     b.HasIndex("EmpresaId");
-
-                    b.HasIndex("TipoTicketId");
 
                     b.ToTable("Tickets");
                 });
@@ -328,10 +348,16 @@ namespace AccesoDatos.Migrations
                     b.Property<byte>("TipoTicketId")
                         .HasColumnType("tinyint");
 
+                    b.Property<int>("TicketId")
+                        .HasColumnType("int");
+
                     b.Property<string>("TipoTicket")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TipoTicketId");
+
+                    b.HasIndex("TicketId");
 
                     b.ToTable("TiposTicket");
                 });
@@ -353,13 +379,17 @@ namespace AccesoDatos.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion1")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Direccion2")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.HasKey("UbicacionId");
 
@@ -566,8 +596,8 @@ namespace AccesoDatos.Migrations
                 {
                     b.HasOne("Entidades.Modelos.Ubicaciones", "Ubicacion")
                         .WithMany("Clientes")
-                        .HasForeignKey("UbicacionId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("Ubicacion_id")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -575,8 +605,8 @@ namespace AccesoDatos.Migrations
                 {
                     b.HasOne("Entidades.Modelos.Clientes", "Cliente")
                         .WithMany("Contactos")
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("Cliente_id")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -585,19 +615,13 @@ namespace AccesoDatos.Migrations
                     b.HasOne("Entidades.Modelos.Clientes", "Cliente")
                         .WithMany("Contratos")
                         .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Entidades.Modelos.Empresas", "Empresa")
                         .WithMany("Contratos")
                         .HasForeignKey("EmpresaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Entidades.Modelos.MetodosPago", "MetodoPago")
-                        .WithMany("Contratos")
-                        .HasForeignKey("MetodoPagoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -606,13 +630,13 @@ namespace AccesoDatos.Migrations
                     b.HasOne("Entidades.Modelos.DetallesServicio", "DetalleServicio")
                         .WithMany("DetallesProductos")
                         .HasForeignKey("DetalleServicioId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Entidades.Modelos.Productos", "Producto")
                         .WithMany("DetallesProductos")
                         .HasForeignKey("ProductoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -621,13 +645,13 @@ namespace AccesoDatos.Migrations
                     b.HasOne("Entidades.Modelos.OrdenesServicio", "OrdenServicio")
                         .WithMany("DetallesServicio")
                         .HasForeignKey("OrdenServicioId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Entidades.Modelos.Tecnicos", "Tecnico")
                         .WithMany("DetallesServicio")
                         .HasForeignKey("TecnicoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -636,7 +660,16 @@ namespace AccesoDatos.Migrations
                     b.HasOne("Entidades.Modelos.TiposTicket", "TipoTicket")
                         .WithMany("EstadoTicket")
                         .HasForeignKey("TipoTicketId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entidades.Modelos.MetodosPago", b =>
+                {
+                    b.HasOne("Entidades.Modelos.Contratos", "Contrato")
+                        .WithMany("MetodosPago")
+                        .HasForeignKey("ContratoId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -645,7 +678,7 @@ namespace AccesoDatos.Migrations
                     b.HasOne("Entidades.Modelos.Tickets", "Ticket")
                         .WithMany("OrdenesServicio")
                         .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -654,13 +687,16 @@ namespace AccesoDatos.Migrations
                     b.HasOne("Entidades.Modelos.Empresas", "Empresa")
                         .WithMany("Tickets")
                         .HasForeignKey("EmpresaId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.HasOne("Entidades.Modelos.TiposTicket", "TipoTicket")
-                        .WithMany("Tickets")
-                        .HasForeignKey("TipoTicketId")
-                        .OnDelete(DeleteBehavior.Restrict)
+            modelBuilder.Entity("Entidades.Modelos.TiposTicket", b =>
+                {
+                    b.HasOne("Entidades.Modelos.Tickets", "Ticket")
+                        .WithMany("TiposTicket")
+                        .HasForeignKey("TicketId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -669,7 +705,7 @@ namespace AccesoDatos.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -678,7 +714,7 @@ namespace AccesoDatos.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -687,7 +723,7 @@ namespace AccesoDatos.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -696,13 +732,13 @@ namespace AccesoDatos.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -711,7 +747,7 @@ namespace AccesoDatos.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

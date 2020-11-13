@@ -9,15 +9,13 @@ namespace Entidades.Modelos
         public TiposTicket()
         {
             EstadoTicket = new HashSet<EstadoTicket>();
+            Tickets = new HashSet<Tickets>();
         }
         [Key]
         public byte TipoTicketId { get; set; }
-        [Required]
         public string TipoTicket { get; set; }
-        [Required]
-        public int TicketId { get; set; }
 
-        public virtual Tickets Ticket { get; set; }
         public virtual ICollection<EstadoTicket> EstadoTicket { get; set; }
+        public virtual ICollection<Tickets> Tickets { get; set; }
     }
 }

@@ -13,11 +13,7 @@ namespace Entidades.Modelos
         }
         [Key]
         public int EmpresaId { get; set; }
-        [Required]
-        [MaxLength(35,ErrorMessage ="El nombre no puede ser mayor a 35 carácteres")]
         public string Nombre { get; set; }
-        [Required]
-        [MaxLength(50,ErrorMessage ="La dirección no puede tener mas de 50 carácteres")]
         public string Direccion1 { get; set; }
         public string Direccion2 { get; set; }
         public string Ciudad { get; set; }

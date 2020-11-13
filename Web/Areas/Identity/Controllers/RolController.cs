@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Web.Areas.Identity.ViewsModels;
 
 namespace Web.Areas.Identity.Controllers
@@ -105,6 +106,41 @@ namespace Web.Areas.Identity.Controllers
                 return View(model);
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> EliminarRol(string id)
+        {
+            var rol = await _gestionRoles.FindByIdAsync(id);
+
+            if (rol == null)
+            {
+                ViewBag.ErrorMessage = $"Rol con ID = {id} no fue encontrado";
+                return View("Error");
+            }
+            else
+            {
+                try
+                {
+                    var result = await _gestionRoles.DeleteAsync(rol);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("ListarRoles");
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View("ListarRoles");
+                }
+                catch (DbUpdateException ex)
+                {
+                    ViewBag.ErrorTitle = $"El rol {rol.Name} está siendo utilizado";
+                    ViewBag.ErrorMessage = $"El rol {rol.Name} no puede ser eliminado porque contiene usuarios. Antes de eliminar el rol quita los usuarios de dicho rol.";
+                    return View("ErrorBorrarRol");
+                }
+            }
+        }
         public async Task<IActionResult> EditarUsuarioRol(string rolId)
         {
             ViewBag.roleId = rolId;
@@ -182,6 +218,147 @@ namespace Web.Areas.Identity.Controllers
                 }
             }
             return RedirectToAction("EditarRol", new { Id = rolId });
+        }
+        public IActionResult ListarUsuarios()
+        {
+            var usuarios = _gestionUsuarios.Users;
+            return View(usuarios);
+        }
+        public async Task<IActionResult> EditarUsuario(string id)
+        {
+            var usuario = await _gestionUsuarios.FindByIdAsync(id);
+            if (usuario == null)
+            {
+                ViewBag.ErrorMessage = $"Usuario con ID = {id} no fue encontrado";
+                return View("Error");
+            }
+            var usuarioClaims = await _gestionUsuarios.GetClaimsAsync(usuario);
+            var usuarioRol = await _gestionUsuarios.GetRolesAsync(usuario);
+
+            var model = new EditarUsuarioViewModel
+            {
+                Id = usuario.Id,
+                Email = usuario.Email,
+                NombreUsuario = usuario.UserName,
+                Notificaciones = usuarioClaims.Select(c => c.Value).ToList(),
+                Roles = usuarioRol
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditarUsuario(EditarUsuarioViewModel model)
+        {
+            var usuario = await _gestionUsuarios.FindByIdAsync(model.Id);
+
+            if (usuario == null) 
+            {
+                ViewBag.ErrorMessage = $"Usuario con ID = {model.Id} no fue encontrado";
+                return View("Error");
+            }
+            else
+            {
+                usuario.Email = model.Email;
+                usuario.UserName = model.NombreUsuario;
+
+                var resultado = await _gestionUsuarios.UpdateAsync(usuario);
+
+                if (resultado.Succeeded)
+                {
+                    return RedirectToAction("ListarUsuarios");
+                }
+
+                foreach (var error in resultado.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(model);
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> BorrarUsuario(string id)
+        {
+            var user = await _gestionUsuarios.FindByIdAsync(id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"Usuario con ID = {id} no fue encontrado";
+                return View("Error");
+            }
+            else
+            {
+                var resultado = await _gestionUsuarios.DeleteAsync(user);
+                if (resultado.Succeeded)
+                {
+                    return RedirectToAction("ListarUsuarios");
+                }
+
+                foreach (var error in resultado.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View("ListarUsuarios");
+            }
+        }
+        public async Task<IActionResult> GestionarRolesUsuarios(string IdUsuario)
+        {
+            ViewBag.IdUsuario = IdUsuario;
+
+            var user = await _gestionUsuarios.FindByIdAsync(IdUsuario);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"El usuario con ID : {IdUsuario} no se encontró";
+                return View("Error");
+            }
+
+            var model = new List<RolUsuarioViewModel>();
+
+            foreach (var rol in _gestionRoles.Roles)
+            {
+                var rolUsuarioModelo = new RolUsuarioViewModel()
+                {
+                    RolId = rol.Id,
+                    RolNombre = rol.Name
+                };
+
+                if (await _gestionUsuarios.IsInRoleAsync(user,rol.Name))
+                {
+                    rolUsuarioModelo.EstaSeleccionado = true;
+                }
+                else
+                {
+                    rolUsuarioModelo.EstaSeleccionado = false;
+                }
+                model.Add(rolUsuarioModelo);
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> GestionarRolesUsuarios(List<RolUsuarioViewModel>model,string IdUsuario)
+        {
+            var user = await _gestionUsuarios.FindByIdAsync(IdUsuario);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"El usuario con ID : {IdUsuario} no se encontró";
+                return View("Error");
+            }
+
+            var roles = await _gestionUsuarios.GetRolesAsync(user);
+            var result = await _gestionUsuarios.RemoveFromRolesAsync(user, roles);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "No se puede eliminar usuarios con roles");
+                return View(model);
+            }
+            result = await _gestionUsuarios.AddToRolesAsync(user, model.Where(u => u.EstaSeleccionado).Select(r => r.RolNombre));
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "No se puede añadir los roles al usuario seleccionado");
+                return View(model);
+            }
+            return RedirectToAction("EditarUsuario", new { Id = IdUsuario });
         }
     }
 }

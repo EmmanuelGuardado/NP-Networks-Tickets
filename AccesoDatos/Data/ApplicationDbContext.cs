@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Entidades.Modelos;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -27,5 +28,16 @@ namespace Web.AccesoDatos.Data
         public virtual DbSet<Tickets> Tickets { get; set; }
         public virtual DbSet<TiposTicket> TiposTicket { get; set; }
         public virtual DbSet<Ubicaciones> Ubicaciones { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            foreach (var foreignkey in builder.Model.GetEntityTypes().SelectMany(e=>e.GetForeignKeys()))
+            {
+                foreignkey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+        }
     }
 }

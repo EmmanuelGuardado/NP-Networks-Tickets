@@ -1,0 +1,31 @@
+﻿@model List<Web.Areas.Identity.ViewsModels.RolUsuarioViewModel>
+
+@{
+    var id = ViewBag.IdUsuario;
+}
+
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h2>Gestionar roles usuario</h2>
+        </div>
+        <div class="card-body">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="form-check m-1">
+                    <input type="hidden" asp-for="@Model[i].RolId" />
+                    <input type="hidden" asp-for="@Model[i].RolNombre" />
+                    <input asp-for="@Model[i].EstaSeleccionado" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model[i].EstaSeleccionado">
+                        @Model[i].RolNombre
+                    </label>
+                </div>
+            }
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Actualizar" class="btn btn-primary" style="width:auto"/>
+            <a asp-action="EditarUsuario" asp-controller="Rol" asp-route-id="@id" class="btn btn-primary" style="width:auto">Cancelar</a>
+        </div>
+    </div>
+</form>

@@ -6,13 +6,14 @@ namespace Entidades.Modelos
 {
     public partial class MetodosPago
     {
+        public MetodosPago()
+        {
+            Contratos = new HashSet<Contratos>();
+        }
         [Key]
         public byte MetodosPagoId { get; set; }
-        [Required]
         public string Nombre { get; set; }
-        [Required]
-        public int ContratoId { get; set; }
 
-        public virtual Contratos Contrato { get; set; }
+        public virtual ICollection<Contratos> Contratos { get; set; }
     }
 }

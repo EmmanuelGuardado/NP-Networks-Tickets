@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -37,6 +38,10 @@ namespace Web.Areas.Identity
 
                 if (result.Succeeded)
                 {
+                    if (_gestionLogin.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("ListarUsuarios", "Cuenta");
+                    }
                     await _gestionLogin.SignInAsync(usuario, isPersistent: false);
                     return RedirectToAction("Index", "Home", new { area = "Principal" });
                 }
@@ -86,6 +91,10 @@ namespace Web.Areas.Identity
             {
                 return Json(false);
             }
+        }
+        public IActionResult AccesoDenegado()
+        {
+            return View();
         }
     }
 }
