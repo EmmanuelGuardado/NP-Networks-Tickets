@@ -52,32 +52,9 @@
             }
         </div>
         <div class="card-footer">
-            @*<a href="#" style="width:auto" class="btn btn-primary">Gestionar roles</a>*@
             <a asp-action="GestionarRolesUsuarios" asp-controller="Rol" asp-route-IdUsuario="@Model.Id" style="width:auto" class="btn btn-primary">
                 Gestionar roles
             </a>
-        </div>
-    </div>
-
-    <div class="card mt-3">
-        <div class="card-header">
-            <h3>Usuario Notificaciones</h3>
-        </div>
-        <div class="card-body">
-            @if (Model.Notificaciones.Any())
-            {
-                foreach (var claim in Model.Notificaciones)
-                {
-                    <h5 class="card-title">@claim</h5>
-                }
-            }
-            else
-            {
-                <h5 class="card-title">Ninguno</h5>
-            }
-        </div>
-        <div class="card-footer">
-            <a href="#" style="width:auto" class="btn btn-primary">Gestionar Notificaciones</a>
         </div>
     </div>
 </form>
