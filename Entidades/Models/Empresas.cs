@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace Entidades.Modelos
+namespace Entidades.Models
 {
     public partial class Empresas
     {
@@ -11,7 +10,7 @@ namespace Entidades.Modelos
             Contratos = new HashSet<Contratos>();
             Tickets = new HashSet<Tickets>();
         }
-        [Key]
+
         public int EmpresaId { get; set; }
         public string Nombre { get; set; }
         public string Direccion1 { get; set; }

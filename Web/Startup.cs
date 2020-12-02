@@ -11,8 +11,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Web.AccesoDatos.Data;
+
 using Entidades.Modelos;
+using Entidades.Models;
 
 namespace Web
 {
@@ -28,10 +29,10 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<NPNetworks_TicketsContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>().AddErrorDescriber<ErroresEspanol>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>().AddErrorDescriber<ErroresEspanol>().AddEntityFrameworkStores<NPNetworks_TicketsContext>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.Configure<IdentityOptions>(o =>

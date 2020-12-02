@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace Entidades.Modelos
+namespace Entidades.Models
 {
     public partial class DetallesServicio
     {
@@ -11,7 +10,6 @@ namespace Entidades.Modelos
             DetallesProductos = new HashSet<DetallesProductos>();
         }
 
-        [Key]
         public int DetalleServicioId { get; set; }
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraFinal { get; set; }

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace Entidades.Modelos
+namespace Entidades.Models
 {
     public partial class Tecnicos
     {
@@ -10,7 +9,7 @@ namespace Entidades.Modelos
         {
             DetallesServicio = new HashSet<DetallesServicio>();
         }
-        [Key]
+
         public int TecnicoId { get; set; }
         public string Nombre { get; set; }
         public bool? Activo { get; set; }

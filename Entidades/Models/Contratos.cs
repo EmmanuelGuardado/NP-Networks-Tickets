@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace Entidades.Modelos
+namespace Entidades.Models
 {
     public partial class Contratos
     {
-        [Key]
         public int ContratoId { get; set; }
         public int EmpresaId { get; set; }
         public int ClienteId { get; set; }

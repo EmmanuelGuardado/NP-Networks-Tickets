@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
-using Entidades.Modelos;
+using Entidades.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Web.AccesoDatos.Data;
 using Web.Areas.Cliente.ViewModels;
 
 namespace Web.Areas.Cliente.Controllers
@@ -14,8 +13,8 @@ namespace Web.Areas.Cliente.Controllers
     [Area("Cliente")]
     public class ClienteController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public ClienteController(ApplicationDbContext db)
+        private readonly NPNetworks_TicketsContext _db;
+        public ClienteController(NPNetworks_TicketsContext db)
         {
             this._db = db;
         }

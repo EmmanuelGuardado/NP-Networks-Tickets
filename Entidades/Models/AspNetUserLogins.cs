@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Entidades.Modelos
+namespace Entidades.Models
 {
     public partial class AspNetUserLogins
     {

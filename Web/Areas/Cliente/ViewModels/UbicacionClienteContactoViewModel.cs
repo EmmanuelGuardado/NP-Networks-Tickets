@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Entidades.Modelos;
+using Entidades.Models;
 
 namespace Web.Areas.Cliente.ViewModels
 {
