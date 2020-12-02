@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entidades.Models
 {
@@ -10,7 +11,7 @@ namespace Entidades.Models
             Contratos = new HashSet<Contratos>();
             Tickets = new HashSet<Tickets>();
         }
-
+        [Key]
         public int EmpresaId { get; set; }
         public string Nombre { get; set; }
         public string Direccion1 { get; set; }

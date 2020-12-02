@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Entidades.Models
 {
-    public partial class NPNetworks_TicketsContext : IdentityDbContext
+    public partial class NPNetworks_TicketsContext : DbContext
     {
         public NPNetworks_TicketsContext()
         {

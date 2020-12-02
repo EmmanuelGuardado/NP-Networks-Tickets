@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations;
 namespace Entidades.Models
 {
     public partial class Tickets
@@ -9,7 +9,7 @@ namespace Entidades.Models
         {
             OrdenesServicio = new HashSet<OrdenesServicio>();
         }
-
+        [Key]
         public int TicketId { get; set; }
         public string DescripcionProblema { get; set; }
         public int EmpresaId { get; set; }

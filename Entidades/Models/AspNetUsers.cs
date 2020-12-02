@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entidades.Models
 {
@@ -12,7 +13,7 @@ namespace Entidades.Models
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
             AspNetUserTokens = new HashSet<AspNetUserTokens>();
         }
-
+        [Key]
         public string Id { get; set; }
         public string UserName { get; set; }
         public string NormalizedUserName { get; set; }

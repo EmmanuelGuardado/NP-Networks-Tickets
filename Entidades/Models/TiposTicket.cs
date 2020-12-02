@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entidades.Models
 {
@@ -10,7 +11,7 @@ namespace Entidades.Models
             EstadoTicket = new HashSet<EstadoTicket>();
             Tickets = new HashSet<Tickets>();
         }
-
+        [Key]
         public byte TipoTicketId { get; set; }
         public string TipoTicket { get; set; }
 

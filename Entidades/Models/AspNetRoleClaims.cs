@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entidades.Models
 {
     public partial class AspNetRoleClaims
     {
+        [Key]
         public int Id { get; set; }
         public string RoleId { get; set; }
         public string ClaimType { get; set; }

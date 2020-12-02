@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entidades.Models
 {
     public partial class Contactos
     {
+        [Key]
         public int ContactoId { get; set; }
         public string Nombre { get; set; }
         public string Email { get; set; }
